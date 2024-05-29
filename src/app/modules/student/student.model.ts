@@ -82,8 +82,8 @@ const studentSchema= new Schema<Student>({
     guardian: guardianSchema, 
     localGuardian: localGuardianSchema,
     profileImg: {type: String},
-    isActive: ['active', 'block']
+    isActive: ['active', 'blocked']
     
 })
 
-const Student= model<Student>('Student', studentSchema)
+export const StudentModel= model<Student>('Student', studentSchema)
