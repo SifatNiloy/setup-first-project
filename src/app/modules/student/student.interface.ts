@@ -1,6 +1,11 @@
 import { Schema, model, connect } from 'mongoose';
 
 // 1. Create an interface representing a document in MongoDB.
+export type userName ={
+  firstName: string;
+  middleName: string;
+  lastName: string;
+};
 
 export type Guardian = {
   fatherName: string;
@@ -10,15 +15,21 @@ export type Guardian = {
   motherOccupation: string;
   motherContactNo: string;
 };
+
+
+
+export type LocalGuardian={
+  name: string;
+  occupation: string;
+  contactNo: string;
+  address: string;
+}
+
 export type Student = {
   id: string;
-  name: {
-    firstName: string;
-    middleName: string;
-    lastName: string;
-  };
+  name: userName;
   gender: 'male' | 'female';
-  dateOfBirth: string;
+  dateOfBirth?: string;
   email: string;
   contactNo: string;
   emergencyContactNo: string;
@@ -26,4 +37,7 @@ export type Student = {
   presentAddress: string;
   permanentAddress: string;
   guardian: Guardian;
+  localGuardian: LocalGuardian;
+  profileImg?: string;
+  isActive: "active" | "inActive" ;
 };
