@@ -12,4 +12,4 @@ async function main() {
     console.error(err);
   }
 }
-main()
+main();

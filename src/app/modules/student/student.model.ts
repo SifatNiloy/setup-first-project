@@ -1,4 +1,4 @@
-import { Schema, model, connect } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import {
   Student,
   LocalGuardian,
@@ -65,6 +65,7 @@ const localGuardianSchema = new Schema<LocalGuardian>({
     required: true,
   },
 });
+
 const studentSchema = new Schema<Student>({
   id: { type: String },
   name: userNameSchema,
