@@ -3,7 +3,7 @@
 // 1. Create an interface representing a document in MongoDB.
 export type userName = {
   firstName: string;
-  middleName: string;
+  middleName?: string;
   lastName: string;
 };
 
@@ -26,7 +26,7 @@ export type LocalGuardian = {
 export type Student = {
   id: string;
   name: userName;
-  gender: 'male' | 'female';
+  gender: 'male' | 'female' | 'other';
   dateOfBirth?: string;
   email: string;
   contactNo: string;

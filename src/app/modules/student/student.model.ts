@@ -177,9 +177,9 @@ const studentSchema = new Schema<Student>({
     type: String,
     trim: true,
     enum: {
-      values: ['active', 'blocked'],
+      values: ['active', 'inActive'],
       message:
-        '{VALUE} is not a valid status. Please select active or blocked.',
+        '{VALUE} is not a valid status. Please select active or inActive.',
     },
     default: 'active',
   },
