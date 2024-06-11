@@ -8,6 +8,8 @@ import {
   // StudentMethods,
 } from './student.interface';
 import validator from 'validator';
+import bcrypt from 'bcrypt';
+import config from '../../config';
 
 const userNameSchema = new Schema<TUserName>({
   firstName: {
@@ -101,6 +103,12 @@ const studentSchema = new Schema<TStudent, StudentModel>({
     required: [true, 'Student ID is required'],
     unique: true,
   },
+  password: {
+    type: String,
+    required: [true, 'Student ID is required'],
+    unique: true,
+    maxlength: [20, `password can't be more than 20 characters`],
+  },
   name: {
     type: userNameSchema,
     trim: true,
@@ -186,11 +194,25 @@ const studentSchema = new Schema<TStudent, StudentModel>({
   },
 });
 
+//pre save middleware / hook : will work on create () save()
+studentSchema.pre('save', async function (next) {
+  // console.log(this, 'pre hook : we will save the data');
+  const user = this;
+  //hashing password and save into DB
+  user.password= await bcrypt.hash(user.password, Number(config.bcrypt_salt_rounds));
+  next();
+});
+
+// post save middleware  hook
+studentSchema.post('save', function () {
+  // console.log(this, 'post hook : we saved our  data');
+});
+
 // creating a custom static method
-studentSchema.statics.isUserExists = async function(id: string){
-  const existingUser = await Student.findOne({id});
+studentSchema.statics.isUserExists = async function (id: string) {
+  const existingUser = await Student.findOne({ id });
   return existingUser;
-}
+};
 
 // creating a custom instance method
 // studentSchema.methods.isUserExists = async function(id: string){
